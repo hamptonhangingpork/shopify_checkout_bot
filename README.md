@@ -4,7 +4,7 @@ Script requires the following applications
 
 ```
 Python3
-Google Chrome
+Google Chrome (Account must already be logged in DRW)
 ```
 
 ## Getting Started
