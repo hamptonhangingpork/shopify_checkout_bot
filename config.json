@@ -1,0 +1,12 @@
+{
+	"MAIN": {
+		"CHROME": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+		"BASE_LINK": "https://derapwinkel.nl/",
+		"CART_LINK": "cart/", 
+		"COLLECTION_PAGE": "collections/frontpage/",
+		"VARIANT_KW": "obi",
+		"PRODUCT_KW": ["conway"],
+		"SLEEP_TIMER": 2,
+		"QUANTITY": "1"
+	}
+}
