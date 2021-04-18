@@ -12,36 +12,38 @@ def checkSite():
 				productLXML = Soup(baseResponse.text,'lxml')
 				productLinks = []
 				for link in productLXML.findAll('a'):
-					productLinks.append(link.get('href'))
+					if all(kw in link.get('href') for kw in configJson['MAIN']['PRODUCT_KW']) and link.get('href') not in productLinks:
+						productLinks.append(link.get('href'))
 				if productLinks:
 					linkOpened = False
 					for link in productLinks:
 						if linkOpened:
 								break
-						if all(kw in link for kw in configJson['MAIN']['PRODUCT_KW']):
-							print(f"Checking {link}...")
-							productResponse = requests.get(urljoin(configJson['MAIN']['BASE_LINK'], link) + ".xml")
-							if productResponse.status_code != 404:
-								productXml = Soup(productResponse.text,'xml')
-								tagList = productXml.find_all('variant')
-								for tag in tagList:
-									productTitle = tag.find("title").text
-									if configJson['MAIN']['VARIANT_KW']:
-										variantFlag = re.search(f".*{configJson['MAIN']['VARIANT_KW']}.*", productTitle, re.IGNORECASE)
-										if variantFlag:
-											name = tag.find("id").text
-											print(f"Check·out {variantFlag[0]} with product id {name}")
-											webbrowser.get('chrome').open(urljoin(configJson['MAIN']['BASE_LINK'], configJson['MAIN']['CART_LINK']) + f"/{name}:{configJson['MAIN']['QUANTITY']}")
-											loopFlag = False
-											linkOpened = True
-											break
-									else:
+						print(f"Checking {link}...")
+						productResponse = requests.get(urljoin(configJson['MAIN']['BASE_LINK'], link) + ".xml")
+						if productResponse.status_code != 404:
+							productXml = Soup(productResponse.text,'xml')
+							tagList = productXml.find_all('variant')
+							for tag in tagList:
+								productTitle = tag.find("title").text
+								if configJson['MAIN']['VARIANT_KW']:
+									variantFlag = re.search(f".*{configJson['MAIN']['VARIANT_KW']}.*", productTitle, re.IGNORECASE)
+									if variantFlag:
 										name = tag.find("id").text
-										print(f"Check·out {productTitle} with product id {name}")
+										print(f"Check·out {variantFlag[0]} with product id {name}")
 										webbrowser.get('chrome').open(urljoin(configJson['MAIN']['BASE_LINK'], configJson['MAIN']['CART_LINK']) + f"/{name}:{configJson['MAIN']['QUANTITY']}")
 										loopFlag = False
 										linkOpened = True
 										break
+								else:
+									name = tag.find("id").text
+									print(f"Check·out {productTitle} with product id {name}")
+									webbrowser.get('chrome').open(urljoin(configJson['MAIN']['BASE_LINK'], configJson['MAIN']['CART_LINK']) + f"/{name}:{configJson['MAIN']['QUANTITY']}")
+									loopFlag = False
+									linkOpened = True
+									break
+				else:
+					print(f"0 matched for keyword/s - {str(configJson['MAIN']['PRODUCT_KW'])}")
 		except Exception as e:
 			print(e)
 		print(f"Sleep for {configJson['MAIN']['SLEEP_TIMER']} seconds")
