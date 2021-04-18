@@ -23,5 +23,5 @@ Before running the script, please ensure that the JSON file is in the same direc
 ## Running the script
 
 ```
-python w.py
+python run.py
 ```
