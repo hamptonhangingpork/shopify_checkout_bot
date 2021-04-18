@@ -1,4 +1,4 @@
-### Prerequisites
+## Prerequisites
 
 Script requires the following applications
 
