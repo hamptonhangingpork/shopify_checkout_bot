@@ -18,7 +18,7 @@ def checkSite():
 					linkOpened = False
 					for link in productLinks:
 						if linkOpened:
-								break
+							break
 						print(f"Checking {link}...")
 						productResponse = requests.get(urljoin(configJson['MAIN']['BASE_LINK'], link) + ".xml")
 						if productResponse.status_code != 404:
