@@ -1,12 +1,45 @@
 {
 	"MAIN": {
 		"CHROME": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+		"CHROMEDRIVER": "C:\\Users\\Kerstan\\Desktop\\derap\\chromedriver.exe",
 		"BASE_LINK": "https://derapwinkel.nl/",
-		"CART_LINK": "cart/", 
-		"COLLECTION_PAGE": "collections/frontpage/",
+		"CART_LINK": "cart", 
+		"COLLECTION_PAGE": "collections/totale-collectie",
 		"VARIANT_KW": "obi",
 		"PRODUCT_KW": ["conway"],
 		"SLEEP_TIMER": 2,
-		"QUANTITY": "1"
+		"QUANTITY": "1",
+		"CHECKOUT": false
+	},
+	"CHECKOUT": {
+		"SHIPPING": {
+			"EMAIL": "",
+			"FIRSTNAME": "",
+			"LASTNAME": "",
+			"ADDRESS1": "", 
+			"ADDRESS2": "",
+			"ZIP": "",
+			"CITY": "",
+			"COUNTRY": "",
+			"STATE": "",
+			"PHONE": ""
+		},
+		"BILLING": {
+			"FIRSTNAME": "",
+			"LASTNAME": "",
+			"ADDRESS1": "", 
+			"ADDRESS2": "",
+			"ZIP": "",
+			"CITY": "",
+			"COUNTRY": "",
+			"STATE": "",
+			"PHONE": ""
+		}
+	},
+	"CARD": {
+		"NUMBER": ["", "", "", ""],
+		"NAME": "",
+		"EXP": ["",""],
+		"SEC": ""
 	}
 }
