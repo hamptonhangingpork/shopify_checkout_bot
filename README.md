@@ -5,7 +5,7 @@ Script requires the following applications
 ```
 Python3
 Google Chrome (Account must already be logged in DRW)
-Chromedriver (Latest version)*
+Chromedriver (Latest version)
 ```
 
 It will also might require the following python libraries
