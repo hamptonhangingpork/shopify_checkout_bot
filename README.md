@@ -8,6 +8,13 @@ Google Chrome (Account must already be logged in DRW)
 Chromedriver (Latest version)
 ```
 
+It will also might require the following python libraries
+
+```
+pip install selenium
+pip install beautifulsoup4
+```
+
 # Getting Started
 
 Before running the script, please ensure that the JSON file is in the same directory as the script file. 
