@@ -9,7 +9,8 @@
 		"PRODUCT_KW": ["conway"],
 		"SLEEP_TIMER": 2,
 		"QUANTITY": "1",
-		"CHECKOUT": false
+		"CHECKOUT": false,
+		"AUTOPAY": false
 	},
 	"CHECKOUT": {
 		"SHIPPING": {

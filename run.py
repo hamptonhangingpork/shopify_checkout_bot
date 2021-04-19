@@ -72,8 +72,9 @@ def checkOut(url):
 	#Proceed to order review page
 	driver.find_element_by_id('continue_button').click()
 	
-	#Pay now (Uncomment the next line if you want the script to auto checkout)
-	#driver.find_element_by_id('continue_button').click()
+	#Pay now 
+	if configJson['MAIN']['AUTOPAY']:
+		driver.find_element_by_id('continue_button').click()
 	
 	#Selenium closes the browser once script execution is finished so I added 5 min sleep timer so you can check order details 
 	time.sleep(300)
