@@ -31,7 +31,7 @@ MAIN
 * PRODUCT_KW (list) - Keywords related to the item that the script will check from the list of URLS in Collection Page. Multiple keyword matching is supported. (ex. ["conway"], ["conway", "goat"])
 * SLEEP_TIMER (int) - Wait time before script executes another check of the store.
 * QUANTITY (str) - Number of copies to be checked out
-* CHECKOUT (bool) - Set to true to enable checkout function. 
+* CHECKOUT (bool) - Set to true to enable checkout function using chromedriver (guest checkout). Set to false will go to start of checkout page using normal web browser
 * AUTOPAY (bool) - Set to true to enable auto checkout of order. 
 
 CHECKOUT
