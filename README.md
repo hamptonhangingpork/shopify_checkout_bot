@@ -1,4 +1,4 @@
-## Prerequisites
+# Prerequisites
 
 Script requires the following applications
 
@@ -8,9 +8,11 @@ Google Chrome (Account must already be logged in DRW)
 Chromedriver (Latest version)
 ```
 
-## Getting Started
+# Getting Started
 
-Before running the script, please ensure that the JSON file is in the same directory as the script file. Please see below for a short guide on setting up the configuration file -
+Before running the script, please ensure that the JSON file is in the same directory as the script file. 
+
+Please see below for a short guide on setting up the configuration file -
 
 MAIN
 * CHROME (str) - Path to chrome executable. Please escape special characters like the backslash (ex. "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" -> "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe")
@@ -22,8 +24,8 @@ MAIN
 * PRODUCT_KW (list) - Keywords related to the item that the script will check from the list of URLS in Collection Page. Multiple keyword matching is supported. (ex. ["conway"], ["conway", "goat"])
 * SLEEP_TIMER (int) - Wait time before script executes another check of the store.
 * QUANTITY (str) - Number of copies to be checked out
-* CHECKOUT (bool) - Set to 'true' to enable checkout function
-* AUTOPAY (bool) - Set to 'true' to enable auto checkout of order
+* CHECKOUT (bool) - Set to true to enable checkout function. 
+* AUTOPAY (bool) - Set to true to enable auto checkout of order. 
 
 CHECKOUT
 * EMAIL (str) - Email address
@@ -44,7 +46,7 @@ CARD
 * SEC (str) - Security code 
 
 
-## Running the script
+# Running the script
 
 ```
 python run.py
