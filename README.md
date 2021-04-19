@@ -1,15 +1,15 @@
 # Prerequisites
 
 Script requires the following applications
-
-```
-Python3
-Google Chrome (Account must already be logged in DRW)
-Chromedriver (Latest version)
-```
+- *Python3*
+- *Google Chrome (Account must already be logged in DRW)*
+- *Chromedriver (Latest version)*
 
 It will also might require the following python libraries
+- *Selenium*
+- *BeautifulSoup*
 
+You can install them by invoking the following in commandline
 ```
 pip install selenium
 pip install beautifulsoup4
