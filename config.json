@@ -6,7 +6,7 @@
 		"CART_LINK": "cart", 
 		"COLLECTION_PAGE": "collections/totale-collectie",
 		"VARIANT_KW": "obi",
-		"PRODUCT_KW": ["conway"],
+		"PRODUCT_KW": ["conway", "maquina"],
 		"SLEEP_TIMER": 2,
 		"QUANTITY": "1",
 		"CHECKOUT": false,
