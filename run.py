@@ -1,4 +1,4 @@
-import requests, webbrowser, time, re, json, os
+import requests, webbrowser, time, json, os
 from bs4 import BeautifulSoup as Soup
 from urllib.parse import urljoin
 from selenium import webdriver
@@ -80,7 +80,11 @@ def checkOut(url):
 	time.sleep(300)
 	
 def checkSite():
-	loopFlag = True		
+	loopFlag = True
+	#Convert keywords to lowercase to make string matching with URL case insensitive
+	kwVariant= [kw.lower() for kw in configJson['MAIN']['VARIANT_KW']]
+	kwProduct = [kw.lower() for kw in configJson['MAIN']['PRODUCT_KW']]
+		
 	while loopFlag:
 		try:
 			print(f"Checking frontpage...")
@@ -88,9 +92,10 @@ def checkSite():
 			if baseResponse.status_code != 404:
 				productLXML = Soup(baseResponse.text,'lxml')
 				productLinks = []
-				for link in productLXML.findAll('a'):
-					if all(kw in link.get('href') for kw in configJson['MAIN']['PRODUCT_KW']) and link.get('href') not in productLinks:
-						productLinks.append(link.get('href'))
+				#Convert URL to lowercase to make string matching with URL case insensitive
+				for link in [str(ahref.get('href')).lower() for ahref in productLXML.findAll('a')]:
+					if all(kw in link for kw in kwProduct) and link not in productLinks:
+						productLinks.append(link)
 				if productLinks:
 					linkOpened = False
 					for link in productLinks:
@@ -104,10 +109,9 @@ def checkSite():
 							for tag in tagList:
 								productTitle = tag.find("title").text
 								if configJson['MAIN']['VARIANT_KW']:
-									variantFlag = re.search(f".*{configJson['MAIN']['VARIANT_KW']}.*", productTitle, re.IGNORECASE)
-									if variantFlag:
+									if all(kw in productTitle.lower() for kw in kwVariant):
 										name = tag.find("id").text
-										print(f"Check·out {variantFlag[0]} with product id {name}")
+										print(f"Check·out {productTitle} with product id {name}")
 										if not configJson['MAIN']['CHECKOUT']:
 											webbrowser.register('chrome',
 											None,
