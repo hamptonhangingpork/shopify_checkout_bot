@@ -83,6 +83,7 @@ def checkSite():
 	loopFlag = True
 	#Convert keywords to lowercase to make string matching with URL case insensitive
 	kwVariant= [kw.lower() for kw in configJson['MAIN']['VARIANT_KW']]
+	exclude_kwVariant= [kw.lower() for kw in configJson['MAIN']['EXCLUDE_VARIANT_KW']]
 	kwProduct = [kw.lower() for kw in configJson['MAIN']['PRODUCT_KW']]
 		
 	while loopFlag:
@@ -109,7 +110,7 @@ def checkSite():
 							for tag in tagList:
 								productTitle = tag.find("title").text
 								if configJson['MAIN']['VARIANT_KW']:
-									if all(kw in productTitle.lower() for kw in kwVariant):
+									if all(kw in productTitle.lower() for kw in kwVariant) and all(kw not in productTitle.lower() for kw in exclude_kwVariant):
 										name = tag.find("id").text
 										print(f"Check·out {productTitle} with product id {name}")
 										if not configJson['MAIN']['CHECKOUT']:
