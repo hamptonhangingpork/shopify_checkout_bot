@@ -28,6 +28,7 @@ Please see below for a short guide on setting up the configuration file -
   * CART_LINK (str) - Cart directory
   * COLLECTION_PAGE (str) - Collection directory
   * VARIANT_KW (list) - Keywords related to the item that the script will check from the product XML. Multiple keyword matching is supported. (ex. ["obi"], ["yellow"])
+  * EXCLUDE_VARIANT_KW (list) - Keywords you want to exclude from the search. (ex. ["obi"])
   * PRODUCT_KW (list) - Keywords related to the item that the script will check from the list of URLS in Collection Page. Multiple keyword matching is supported. (ex. ["conway"], ["conway", "goat"])
   * SLEEP_TIMER (int) - Wait time before script executes another check of the store.
   * QUANTITY (str) - Number of copies to be checked out
