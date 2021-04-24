@@ -4,6 +4,9 @@ from urllib.parse import urljoin
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 
 def checkOut(url):
 	driver = webdriver.Chrome(configJson['MAIN']['CHROMEDRIVER'])
@@ -25,13 +28,18 @@ def checkOut(url):
 		driver.find_element_by_id("checkout_shipping_address_address2").send_keys(configJson['CHECKOUT']['SHIPPING']['ADDRESS2'])
 	driver.find_element_by_id("checkout_shipping_address_city").send_keys(configJson['CHECKOUT']['SHIPPING']['CITY'])
 	driver.find_element_by_id("checkout_shipping_address_zip").send_keys(configJson['CHECKOUT']['SHIPPING']['ZIP'])
-	driver.find_element_by_id("checkout_shipping_address_phone").send_keys(configJson['CHECKOUT']['SHIPPING']['PHONE'])
+	
+	#Ignore platforms without phone
+	try:
+		driver.find_element_by_id("checkout_shipping_address_phone").send_keys(configJson['CHECKOUT']['SHIPPING']['PHONE'])
+	except:
+		pass
 	
 	#Proceed to shipping options
-	driver.find_element_by_id('continue_button').click()
+	WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID, 'continue_button'))).click()
 	
 	#Proceed to billing
-	driver.find_element_by_id('continue_button').click()
+	WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID, 'continue_button'))).click()
 	
 	driver.switch_to.frame(driver.find_element_by_xpath("//*[contains(@id, 'card-fields-number-')]"))
 	for number in configJson['CARD']['NUMBER']:
@@ -67,14 +75,23 @@ def checkOut(url):
 		driver.find_element_by_id("checkout_billing_address_address2").send_keys(configJson['CHECKOUT']['BILLING']['ADDRESS2'])
 	driver.find_element_by_id("checkout_billing_address_city").send_keys(configJson['CHECKOUT']['BILLING']['CITY'])
 	driver.find_element_by_id("checkout_billing_address_zip").send_keys(configJson['CHECKOUT']['BILLING']['ZIP'])
-	driver.find_element_by_id("checkout_billing_address_phone").send_keys(configJson['CHECKOUT']['BILLING']['PHONE'])
 	
-	#Proceed to order review page
-	driver.find_element_by_id('continue_button').click()
+	#Ignore platforms without phone
+	try:
+		driver.find_element_by_id("checkout_billing_address_phone").send_keys(configJson['CHECKOUT']['BILLING']['PHONE'])
+	except:
+		pass
 	
-	#Pay now 
+	#Pay now or proceed to order review page
 	if configJson['MAIN']['AUTOPAY']:
-		driver.find_element_by_id('continue_button').click()
+		WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID, 'continue_button'))).click()
+	
+	#Pay now if platform has a order review page
+	try:
+		if configJson['MAIN']['AUTOPAY']:
+			WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.ID, 'continue_button'))).click()
+	except:
+		pass
 	
 	#Selenium closes the browser once script execution is finished so I added 5 min sleep timer so you can check order details 
 	time.sleep(300)
