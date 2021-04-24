@@ -108,21 +108,27 @@ def checkSite():
 							productXml = Soup(productResponse.text,'xml')
 							tagList = productXml.find_all('variant')
 							for tag in tagList:
+								skipFlag = False
 								productTitle = tag.find("title").text
-								if configJson['MAIN']['VARIANT_KW']:
-									if all(kw in productTitle.lower() for kw in kwVariant) and all(kw not in productTitle.lower() for kw in exclude_kwVariant):
-										name = tag.find("id").text
-										print(f"Check·out {productTitle} with product id {name}")
-										if not configJson['MAIN']['CHECKOUT']:
-											webbrowser.register('chrome',
-											None,
-											webbrowser.BackgroundBrowser(configJson['MAIN']['CHROME']))
-											webbrowser.get('chrome').open(urljoin(configJson['MAIN']['BASE_LINK'], configJson['MAIN']['CART_LINK']) + f"/{name}:{configJson['MAIN']['QUANTITY']}")
-										else:
-											checkOut(urljoin(configJson['MAIN']['BASE_LINK'], configJson['MAIN']['CART_LINK']) + f"/{name}:{configJson['MAIN']['QUANTITY']}")
-										loopFlag = False
-										linkOpened = True
-										break
+								print(productTitle)
+								if kwVariant:
+									if all(kw in productTitle.lower() for kw in kwVariant):
+										if exclude_kwVariant:
+											if all(kw in productTitle.lower() for kw in exclude_kwVariant):
+												skipFlag = True
+										if not skipFlag:
+											name = tag.find("id").text
+											print(f"Check·out {productTitle} with product id {name}")
+											if not configJson['MAIN']['CHECKOUT']:
+												webbrowser.register('chrome',
+												None,
+												webbrowser.BackgroundBrowser(configJson['MAIN']['CHROME']))
+												webbrowser.get('chrome').open(urljoin(configJson['MAIN']['BASE_LINK'], configJson['MAIN']['CART_LINK']) + f"/{name}:{configJson['MAIN']['QUANTITY']}")
+											else:
+												checkOut(urljoin(configJson['MAIN']['BASE_LINK'], configJson['MAIN']['CART_LINK']) + f"/{name}:{configJson['MAIN']['QUANTITY']}")
+											loopFlag = False
+											linkOpened = True
+											break
 								else:
 									name = tag.find("id").text
 									print(f"Check·out {productTitle} with product id {name}")
