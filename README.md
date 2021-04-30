@@ -34,6 +34,7 @@ Please see below for a short guide on setting up the configuration file -
   * QUANTITY (str) - Number of copies to be checked out
   * CHECKOUT (bool) - Set to true to enable checkout function using chromedriver (guest checkout). Set to false will go to start of checkout page using normal web browser
   * AUTOPAY (bool) - Set to true to enable auto checkout of order. 
+  * MANUAL_CO (bool) - Set to true to enable user to manually checkout if script encounters an error. If set to false, script would close browser and retry.
 
 - CHECKOUT
   * EMAIL (str) - Email address
