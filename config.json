@@ -11,7 +11,8 @@
 		"SLEEP_TIMER": 2,
 		"QUANTITY": "1",
 		"CHECKOUT": false,
-		"AUTOPAY": false
+		"AUTOPAY": false,
+		"MANUAL_CO": true,
 	},
 	"CHECKOUT": {
 		"SHIPPING": {
